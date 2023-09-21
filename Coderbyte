@@ -108,3 +108,63 @@ def LongestWord(sen):
 
   return sen
 
+
+
+
+
+Find Intersection
+Have the function FindIntersection(strArr) read the array of strings stored in strArr which will contain 2 elements: 
+the first element will represent a list of comma-separated numbers sorted in ascending order, 
+the second element will represent a second list of comma-separated numbers (also sorted). 
+Your goal is to return a comma-separated string containing the numbers that occur in elements of strArr in sorted order. 
+If there is no intersection, return the string false.
+
+
+
+def FindIntersection(strArr):
+
+  # code goes here
+  setOne = set(strArr[0].split(", "))
+  setTwo = set(strArr[1].split(", "))
+
+  result = sorted(list(setOne.intersection(setTwo)), key=lambda str: int(str))
+    
+  return ','.join(result) if len(result) > 0 else False
+# keep this function call here 
+print(FindIntersection(input()))
+
+
+
+
+Questions Marks
+Have the function QuestionsMarks(str) take the str string parameter, which will contain single digit numbers, 
+letters, and question marks, and check if there are exactly 3 question marks between every pair of two numbers that add up to 10. 
+If so, then your program should return the string true, otherwise it should return the string false. 
+If there aren't any two numbers that add up to 10 in the string, then your program should return false as well.
+
+For example: if str is "arrb6???4xxbl5???eee5" then your program should return true because there are exactly 
+3 question marks between 6 and 4, and 3 question marks between 5 and 5 at the end of the string.
+
+
+
+def QuestionsMarks(text):
+  question_marks = 0
+  last_number = 0
+  found_any = False
+  
+  for c in text:
+    if c.isdigit():
+      n = int(c)
+      if last_number + n == 10:
+        found_any = True
+        if question_marks != 3:
+          return False
+      question_marks = 0
+      last_number = n
+    elif c == '?':
+      question_marks += 1
+  return str(found_any).lower()
+
+# keep this function call here 
+print(QuestionsMarks(input()))
+
